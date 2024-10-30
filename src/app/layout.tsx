@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Providers from "@/components/Providers";
+import TopNav from "@/components/navbar/TopNav";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,6 +29,8 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
+          <h1 className="test-2xl">app/layout.tsx</h1>
+          <TopNav></TopNav>
           {children}
         </Providers>
       </body>
