@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* For Navbar Login and Regester buttons currently .css */
+.user-initial-act {
+    @apply text-white border border-blue-400 ;
+  }
+  
