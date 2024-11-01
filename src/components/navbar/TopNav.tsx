@@ -1,6 +1,7 @@
 import { Button, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@nextui-org/react'
 import React from 'react'
 import { GiMatchTip } from 'react-icons/gi'
+import NavLink from './NavLink'
 
 export default function TopNav(  ) {
   return (
@@ -12,21 +13,22 @@ export default function TopNav(  ) {
         item:[
             'text-xl',
             'text-white',
-            'uppercase'
+            'uppercase',
+            'data-[active=true] : text-yellow-200'
         ]
       }}>
         <NavbarBrand as={Link} href='/'>
             <GiMatchTip className='text-gray-200' size={40}/>
-            <div className='font-bold text-3xl  flex'>
+            <div className='font-bold text-3xl  flex' >
                   <span className='text-gray-900'>Next</span>
                   <span className='text-gray-200'>Match</span>             
             </div>
         </NavbarBrand>
         <NavbarContent justify='center'>
-            <NavbarItem as={Link} href='/members'>Members</NavbarItem>
-            <NavbarItem as={Link} href='/lists'>Lists</NavbarItem>
-            <NavbarItem as={Link} href='/messages'>Messages</NavbarItem>
-            {/* <NavbarItem as={Link} href='/'>Matches</NavbarItem> */}
+            <NavLink href='/matches' label='Matches'/>
+            <NavLink href='/members' label='Members'/>
+            <NavLink href='/lists' label='Lists'/>
+            
         </NavbarContent>
         <NavbarContent justify='end'>
            
