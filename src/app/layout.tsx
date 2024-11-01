@@ -31,7 +31,7 @@ export default function RootLayout({
         <Providers>
           <h1 className="test-2xl">app/layout.tsx</h1>
           <TopNav></TopNav>
-          <main className="container mx-auto p-10">
+          <main className="container mx-auto">
             {children}
 
           </main>
