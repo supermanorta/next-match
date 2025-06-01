@@ -1,0 +1,18 @@
+model PO_Item_Detail {
+  id          Int      @id @default(autoincrement())
+  // ... other fields ...
+  buyer_code  String?  // This is the column linked
+  buyer       Buyer_Definition? @relation(fields: [buyer_code], references: [buyer_bought_code] onDelete:[NoAction], Update:[NoAction] map: "fk_po_item_detail_bdm_cd")
+
+ 
+}
+
+model Buyer_Definition {
+  pk_buyer_defn Int     @id @default(autoincrement())
+  buyer_bought_code    String  @unique
+  // ... other fields ...
+  po_item_details PO_Item_Detail[] // back relation (optional)
+  
+}
+
+
