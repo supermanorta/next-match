@@ -9,13 +9,25 @@ import { useForm } from 'react-hook-form';
 import { GiPadlock } from 'react-icons/gi';
 
 export default function RegisterForm() {
-    const {register, handleSubmit, formState:{errors, isValid} } = useForm<RegisterSchema>({
+    const {register, handleSubmit,setError, formState:{errors, isValid} } = useForm<RegisterSchema>({
         // resolver: zodResolver(registerSchema),
         mode: 'onTouched'
     });
     const onSubmit = async (data:  RegisterSchema) => {
         const results = await registerUser(data);
-        console.log(results);
+        if(results.status == 'success'){
+            console.log('User signed up');
+        }else{
+            if(Array.isArray(results.error)){
+                results.error.forEach((e)=>{
+                    const fieldName = e.path.join('.') as 'email' |'name'|'password';//the join helps us define this as a string
+                    setError(fieldName,{message:e.message})
+                })
+            }else{
+                setError('root.serverError', {message: results.error}); // root.serverError(property) is given to us by RHF for root=level errors out of the box. 
+
+            }
+        }
     }
   return (
     <Card className='w-2/5 mx-auto'>
@@ -56,7 +68,8 @@ export default function RegisterForm() {
                         isInvalid={!!errors.password}
                         errorMessage={errors.password?.message }
                         >
-                    </Input>     
+                    </Input>  
+                    {errors.root?.serverError && (<p className='text-danger text-sm'>{errors.root.serverError.message}</p>)}   
                     <Button isDisabled={!isValid} fullWidth color='secondary' type='submit'>
                         Register
                     </Button>            
